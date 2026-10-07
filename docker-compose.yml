@@ -1,0 +1,35 @@
+services:
+  airport-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: airport-service-standalone
+    ports:
+      - "8001:8001"
+    environment:
+      - PORT=8001
+      - API_COLOMBIA_URL=https://api-colombia.com/api/v1/Airport
+      - REDIS_URL=redis://redis-airport:6379/0
+      - LOG_LEVEL=INFO
+    depends_on:
+      redis-airport:
+        condition: service_healthy
+    networks:
+      - airport-net
+
+  redis-airport:
+    image: redis:7-alpine
+    container_name: redis-airport-standalone
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - airport-net
+
+networks:
+  airport-net:
+    driver: bridge
