@@ -4,6 +4,7 @@ import random
 from typing import Any
 
 import httpx
+
 from src.domain.models.airport import Airport
 from src.domain.ports.external_airport_port import ExternalAirportPort
 from src.infrastructure.adapters.circuit_breaker import (

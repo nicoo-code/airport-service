@@ -2,6 +2,7 @@ import asyncio
 import time
 
 import pytest
+
 from src.infrastructure.adapters.circuit_breaker import (
     CircuitBreaker,
     CircuitBreakerOpenException,

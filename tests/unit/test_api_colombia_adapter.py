@@ -1,4 +1,5 @@
 import pytest
+
 from src.domain.models.airport import Airport
 from src.infrastructure.adapters.api_colombia_adapter import ApiColombiaAdapter
 

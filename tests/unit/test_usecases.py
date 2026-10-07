@@ -1,6 +1,7 @@
 from unittest.mock import AsyncMock
 
 import pytest
+
 from src.application.get_airport_by_id import GetAirportByIdUseCase
 from src.application.get_airports_for_plotly import GetAirportsForPlotlyUseCase
 from src.application.list_airports import ListAirportsUseCase
@@ -107,7 +108,9 @@ async def test_get_airports_for_plotly(sample_airports):
 
     list_uc = ListAirportsUseCase(external_port=mock_external, cache_port=mock_cache)
     plotly_adapter = PlotlyAdapter()
-    plotly_uc = GetAirportsForPlotlyUseCase(list_use_case=list_uc, plotly_adapter=plotly_adapter)
+    plotly_uc = GetAirportsForPlotlyUseCase(
+        list_use_case=list_uc, plotly_adapter=plotly_adapter
+    )
 
     result = await plotly_uc.execute()
     assert "data" in result

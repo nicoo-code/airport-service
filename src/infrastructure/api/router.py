@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, status
+
 from src.application.get_airport_by_id import GetAirportByIdUseCase
 from src.application.get_airports_for_plotly import GetAirportsForPlotlyUseCase
 from src.application.list_airports import ListAirportsUseCase
