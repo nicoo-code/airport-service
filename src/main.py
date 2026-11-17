@@ -81,16 +81,20 @@ app.add_middleware(
 async def trace_and_log_middleware(request: Request, call_next):
     trace_parent = request.headers.get("traceparent")
     trace_id = "00000000000000000000000000000000"
+    span_id = "0000000000000000"
+    # Formato W3C Trace Context: version-trace_id-parent_id-flags
     if trace_parent and "-" in trace_parent:
         parts = trace_parent.split("-")
         if len(parts) >= 2:
             trace_id = parts[1]
+        if len(parts) >= 3:
+            span_id = parts[2]
 
     start_time = time.time()
     response = await call_next(request)
     duration_ms = (time.time() - start_time) * 1000
 
-    extra = {"trace_id": trace_id}
+    extra = {"trace_id": trace_id, "span_id": span_id}
     logger.info(
         f"{request.method} {request.url.path} - Status {response.status_code} ({duration_ms:.2f}ms)",
         extra=extra,

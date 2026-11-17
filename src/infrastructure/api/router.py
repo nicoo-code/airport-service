@@ -4,6 +4,7 @@ from src.application.get_airport_by_id import GetAirportByIdUseCase
 from src.application.get_airports_for_plotly import GetAirportsForPlotlyUseCase
 from src.application.list_airports import ListAirportsUseCase
 from src.infrastructure.api.schemas import AirportResponse, HealthCheckResponse
+from src.infrastructure.config import settings
 
 
 def create_airport_router(
@@ -59,7 +60,7 @@ def create_airport_router(
         cb_status = circuit_breaker.get_status()
         return HealthCheckResponse(
             status="UP",
-            service="airport-service",
+            service=settings.service_name,
             redis_connected=redis_ok,
             circuit_breaker=cb_status,
         )

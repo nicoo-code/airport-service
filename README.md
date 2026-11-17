@@ -32,8 +32,8 @@ src/
     ├── api/                   # Controladores FastAPI y Esquemas Pydantic v2
     │   ├── router.py
     │   └── schemas.py
-    ├── config.py              # Configuración y variables de entorno
-    └── main.py                # Inicialización de la aplicación FastAPI y middlewares
+    └── config.py              # Configuración y variables de entorno
+main.py                        # (src/main.py) Inicialización de la aplicación FastAPI y middlewares
 ```
 
 ---
@@ -60,7 +60,7 @@ src/
 
 5. **Observabilidad y Tracing:**
    - Logs estructurados en formato JSON (`timestamp`, `level`, `service`, `trace_id`, `span_id`).
-   - Soporte para W3C Trace Context (`traceparent`).
+   - Soporte para W3C Trace Context (`traceparent`): se extraen `trace_id` y `span_id` para correlacionar los logs.
 
 ---
 
